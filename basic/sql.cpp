@@ -173,3 +173,51 @@ CREATE INDEX idx_empname ON Employee(EmpName);
 -- MULTILEVEL Index (Composite Index)
 CREATE INDEX idx_emp_composite ON Employee(EmpName, Age);
 */
+
+
+1. GRANT Command
+Used to provide privileges to users on database objects like tables, views, or schemas.
+
+sql
+Copy
+Edit
+-- Grant SELECT and INSERT privileges on the Employee table to user 'John'
+GRANT SELECT, INSERT 
+ON Employee 
+TO John;
+
+-- Grant ALL privileges on a database to a user
+GRANT ALL PRIVILEGES 
+ON DatabaseName.* 
+TO 'John'@'localhost';
+
+-- Grant with admin option
+GRANT SELECT 
+ON Employee 
+TO John 
+WITH GRANT OPTION;
+2. REVOKE Command
+Used to withdraw privileges given by the GRANT command.
+
+sql
+Copy
+Edit
+-- Revoke SELECT and INSERT privileges from user 'John'
+REVOKE SELECT, INSERT 
+ON Employee 
+FROM John;
+
+-- Revoke all privileges on the database
+REVOKE ALL PRIVILEGES 
+ON DatabaseName.* 
+FROM 'John'@'localhost';
+3. Denying Permissions (Specific Databases Support)
+Some databases support more granular control using DENY (e.g., SQL Server).
+
+sql
+Copy
+Edit
+-- Deny DELETE permission to user 'John' in SQL Server
+DENY DELETE 
+ON Employee 
+TO John;
