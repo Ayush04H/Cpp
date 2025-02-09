@@ -172,7 +172,7 @@ CREATE INDEX idx_empname ON Employee(EmpName);
 
 -- MULTILEVEL Index (Composite Index)
 CREATE INDEX idx_emp_composite ON Employee(EmpName, Age);
-*/
+
 
 
 1. GRANT Command
@@ -221,3 +221,4 @@ Edit
 DENY DELETE 
 ON Employee 
 TO John;
+*/
