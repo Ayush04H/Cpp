@@ -66,41 +66,38 @@ print("-" * 30)
 
 # --- 4. Merge Sort ---
 # This version returns a new sorted list.
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    
-    mid = len(arr) // 2
-    L_half = arr[:mid]
-    R_half = arr[mid:]
-
-    L_sorted = merge_sort(L_half) # Recursively sort left half
-    R_sorted = merge_sort(R_half) # Recursively sort right half
-
-    # Merge the two sorted halves
-    merged_array = []
-    i = j = 0
-    while i < len(L_sorted) and j < len(R_sorted):
-        if L_sorted[i] < R_sorted[j]:
-            merged_array.append(L_sorted[i])
-            i += 1
+def merge(a,l,m,h):
+    left=a[l:m+1]
+    right=a[m+1:h+1]
+    k=l
+    i=j=0
+    while i<len(left) and j<len(right):
+        if left[i]<=right[j]:
+            a[k]=left[i]
+            i+=1
+            k+=1
         else:
-            merged_array.append(R_sorted[j])
-            j += 1
-    
-    # Append remaining elements (if any)
-    merged_array.extend(L_sorted[i:])
-    merged_array.extend(R_sorted[j:])
-    
-    return merged_array
+            a[k]=right[j]
+            j+=1
+            k+=1
+    while i<len(left):
+        a[k]=left[i]
+        i+=1
+        k+=1
+    while j<len(right):
+        a[k]=right[j]
+        j+=1
+        k+=1
+def mergesort(a,l,r):
+    if r>l:
+        m=(r+l)//2
+        mergesort(a,l,m)
+        mergesort(a,m+1,r)
+        merge(a,l,m,r)
 
-print(f"\n--- Testing Merge Sort ---")
-arr_to_sort_merge = TEST_ARRAY_CONTENT.copy()
-print("Original array:", arr_to_sort_merge)
-# Merge sort returns a new list, so we assign it back if we want the original variable to hold the sorted list
-arr_to_sort_merge = merge_sort(arr_to_sort_merge)
-print("Sorted array:  ", arr_to_sort_merge)
-print("-" * 30)
+l=[10,8,20,5,110,0,63,87,12,11]
+mergesort(l,0,len(l)-1)
+print(l)
 
 
 # --- 5. Quick Sort (Lomuto Partition Scheme) ---
